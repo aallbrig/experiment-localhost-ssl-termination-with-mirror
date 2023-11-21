@@ -587,7 +587,7 @@ MonoBehaviour:
   clientUseWss: 1
   clientWebsocketSettings:
     ClientPortOption: 2
-    CustomClientPort: 8443
+    CustomClientPort: 9443
   _logLevels: 3
 --- !u!114 &1282001524
 MonoBehaviour:

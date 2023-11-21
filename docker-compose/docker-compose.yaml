@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  tanks_reverse_proxy:
+    platform: linux/amd64
+    build:
+      context: ../docker/tanks-nginx-reverse-proxy
+    ports:
+      - "9443:443"
+    depends_on:
+      - tanks_mirror_game_server
+      - tanks_web_game_client
+
+  tanks_web_game_client:
+    platform: linux/amd64
+    build:
+      context: ../docker/tanks-web-client
+    ports:
+      - "9080:80"
+
+  tanks_mirror_game_server:
+    platform: linux/amd64
+    build:
+      context: ../docker/tanks-game-server
+    ports:
+      - "9777:7777/udp"
+      - "9778:7778/tcp"
