@@ -11,8 +11,6 @@ ARG CERT_ORGANIZATION=AwesomeCorp
 ARG CERT_ORGANIZATIONAL_UNIT=AtlantisEngineering
 ARG CERT_COMMON_NAME=localhost
 
-RUN mkdir -p /etc/nginx/logs
-
 RUN apk update && apk add openssl
 
 # generate self-signed certificates (https)
@@ -32,4 +30,5 @@ RUN mkdir -p /etc/nginx/ssl && \
       -out /etc/nginx/ssl/${SSL_FILE_PREFIX}.crt
 
 COPY etc/nginx/conf.d/ /etc/nginx/conf.d/
+RUN rm /etc/nginx/conf.d/default.conf
 

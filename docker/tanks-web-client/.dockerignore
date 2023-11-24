@@ -1,3 +1,4 @@
 *
 !game-web-client-build
+!etc/nginx/conf.d
 game-web-client-build/.gitignore
