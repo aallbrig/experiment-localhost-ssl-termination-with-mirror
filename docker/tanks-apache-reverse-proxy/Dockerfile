@@ -1,4 +1,4 @@
-FROM httpd:alpine
+FROM alpine:latest AS certs
 
 # optional build args
 # below is used as cert file prefixes
@@ -29,5 +29,13 @@ RUN mkdir -p /etc/ssl && mkdir -p /etc/ssl/private && mkdir -p /etc/ssl/certs &&
       -signkey /etc/ssl/private/${SSL_FILE_PREFIX}.key \
       -out /etc/ssl/certs/${SSL_FILE_PREFIX}.crt
 
+FROM httpd:alpine
+
+ARG SSL_FILE_PREFIX=tanks-apache-reverse-proxy
+
 COPY usr/local/apache2/htdocs /usr/local/apache2/htdocs
 COPY usr/local/apache2/conf/httpd.apache.conf /usr/local/apache2/conf/httpd.conf
+
+# place certs in expected default location (consumed by /usr/local/apache2/conf/extra/httpd-ssl.conf)
+COPY --from=certs /etc/ssl/private/${SSL_FILE_PREFIX}.key /usr/local/apache2/conf/server.key
+COPY --from=certs /etc/ssl/certs/${SSL_FILE_PREFIX}.crt /usr/local/apache2/conf/server.crt
