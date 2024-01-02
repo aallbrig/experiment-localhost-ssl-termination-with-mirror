@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Scene.unity
+    path: Assets/Scenes/WebTanks.unity
     guid: afde859cbb16c49eebeb7d76e96b7ef6
   m_configObjects: {}
