@@ -1,6 +1,7 @@
 version: '3.7'
 
 services:
+  # Reverse Proxies
   tanks_nginx_reverse_proxy:
     platform: linux/amd64
     build:
@@ -20,6 +21,7 @@ services:
       - tanks_mirror_game_server
       - tanks_web_game_client
 
+  # Game Client(s)
   tanks_web_game_client:
     platform: linux/amd64
     build:
@@ -27,6 +29,7 @@ services:
     ports:
       - "9080:80"
 
+  # Game Server(s)
   tanks_mirror_game_server:
     platform: linux/amd64
     build:
